@@ -27,7 +27,7 @@ class PigGame:
 
             if roll == 1:
                 print(f"{player.name} rolled a 1! No points added. Turn over.")
-                break  # End the turn with no points
+                
             else:
                 turn_total += roll
                 print(f"Turn total: {turn_total}, Game score: {player.score}")
