@@ -13,7 +13,7 @@ class PigGame:
     def __init__(self, player1, player2):
         self.players = [player1, player2]
         self.die = Die()
-        self.current_player = 0
+        self.current_player = 0  
 
     def playTurn(self):
         player = self.players[self.current_player]
@@ -27,16 +27,13 @@ class PigGame:
 
             if roll == 1:
                 print(f"{player.name} rolled a 1! No points added. Turn over.")
-                
+                break  
             else:
                 turn_total += roll
-                print(f"Turn total: {turn_total}, Game score: {player.score}")
+                print(f"Turn total so far: {turn_total}, Total game score: {player.score}")
 
-                while True:
-                    decision = input(f"{player.name}, roll (r) or hold (h)? ").lower()
-                    if decision in ['r', 'h']:
-                        break
-                    print("Invalid input. Please enter 'r' to roll or 'h' to hold.")
+                
+                decision = input(f"{player.name}, roll again (r) or hold (h)? ").lower()
 
                 if decision == 'h':
                     player.score += turn_total
@@ -46,12 +43,12 @@ class PigGame:
         
         self.current_player = (self.current_player + 1) % 2
 
-    def is_game_over(self):
+    def gameOver(self):
         return any(player.score >= 100 for player in self.players)
 
     def play(self):
         print("Welcome to the game of Pig!")
-        while not self.is_game_over():
+        while not self.gameOver():
             self.playTurn()
 
         winner = max(self.players, key=lambda p: p.score)
@@ -59,9 +56,10 @@ class PigGame:
 
 if __name__ == "__main__":
     random.seed(0)  
-
+   
     player1 = Player("Player 1")
     player2 = Player("Player 2")
+
 
     game = PigGame(player1, player2)
     game.play()
