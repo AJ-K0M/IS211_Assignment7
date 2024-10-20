@@ -46,12 +46,12 @@ class PigGame:
         
         self.current_player = (self.current_player + 1) % 2
 
-    def is_game_over(self):
+    def gameOver(self):
         return any(player.score >= 100 for player in self.players)
 
     def play(self):
         print("Welcome to the game of Pig!")
-        while not self.is_game_over():
+        while not self.gameOver():
             self.playTurn()
 
         winner = max(self.players, key=lambda p: p.score)
